@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Latiihan 3 Menampilkan Tooltip Tooltip dan Poopuo (Modul 3)</title>
+    <link rel="stylesheet" type="text/css"" href="leaflet.css"/>
+    <script type="text/javascript" src="leaflet.js"></script>
+</head>
+<body>
+    <div id="mapku" style="width: 100%; height: 600px;"></div>
+</body>
+<script type="text/javascript">
+     var mymap = L.map('mapku').setView([-0.9137562664733327, 100.46738292876353],17);
+    
+     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom:18,
+        id:'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(mymap);
+
+    L.marker([-0.9241358328363046, 100.36245736766848],17).bindTooltip("Masjid raya Sumater Barat").addTo(mymap); //Masjid Raya Sumbar
+    L.marker([-0.9374867431110305, 100.36039978464098],17).bindTooltip("Kantor Gubernur Sumatera Barat").addTo(mymap); // Kantor Gubernur
+
+    L.marker([-0.9241358328363046, 100.36245736766848],17).bindPopup("<b> Info Masjid raya Sumater Barat</b> <br> Waktu Zuhur : 12:15 WIB").addTo(mymap); //Masjid Raya Sumbar
+    L.marker([-0.9374867431110305, 100.36039978464098],17).bindPopup("<b> Informasi Layanan Kantor Gubernur</b> <br> Layanan Ditutup Sementara Karena Covid").addTo(mymap); //Kantor Gubernur
+
+    L.marker([-0.9144177147594804, 100.46616172587504],17).bindTooltip("Politeknik Negeri Padang").addTo(mymap);
+
+    var info_pnp = '<p style="text-align: center;"> <img src="http://p3m.pnp.ac.id/wp-content/uploads/2020/04/pnp.jpg" width="250px" height="100px"></p><p>Politeknik Negeri Padang didirikan pada tahun 1987, di mana keberadaan politeknik merupakan salah satu dari 17 (tujuh belas) politeknik pertama di Indonesia, yang bertujuan menjawab tantangan perkembangan dunia industri dan dunia usaha yang menuntut kompetensi dari tenaga-tenaga kerja terampil, professional dan mandiri yang lebih mengutamakan attitude, knowledge dan skill serta kompeten di bidangnya.</p>';
+    L.marker([-0.9144177147594804, 100.46616172587504],17).bindTooltip("Politeknik Negeri Padang").bindPopup(info_pnp).addTo(mymap); //masjid Raya
+
+    var info_kantor_gubernur = '<p style="text-align: center;"> <img src="https://cl-static-v3.padangkita.com/wp-content/uploads/2020/09/kantor-gubernur.jpg" width="250px" height="100px"></p><p>Kantor Gubernur Prov. Sumatera Barat yang terletak di Jalan. Sudirman Padang, mulai dibangun pada tahun1961 atas gagasan dan prakarsa Gubernur Sumbar pada saat itu alm. Kaharoeddin Dt. Rangkayo Basa untuk mengembalikan "batang tarandam", jati diri dan eksistensi masyarakat Minang yang terpuruk setelah peristiwa PRRI.</p>';
+    L.marker([-0.9374867431110305, 100.36039978464098],17).bindTooltip("Kantor Gubernur Sumatera Barat").bindPopup(info_kantor_gubernur).addTo(mymap); //kantor gubernur
+
+
+    var info_masjid_raya = '<p style="text-align: center;"> <iframe width="250px" height="100px"src="https://www.youtube.com/embed/aqW5KASLztQ" frameborder="0"allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;picture-in-picture" allowfullscreen></iframe></p><p style="text-align: justify;">Masjid ini berada di Jalan Khatib Sulaiman, Alai Parak Kopi, Padang Utara dan dibangun di atas lahan seluas 0 ribu meter persegi, dengan luas bangunan mencapai 18 ribu meter persegi. Tak serupa masjid pada umumnya, masjid ini justru tak memiliki kubah, melainkan hanya memiliki atap khas budaya Minangkabau. Bagian atapnya memiliki desain Rumah Gadang dengan empat sudut lancip, sedangkan bangunannya berbentuk gonjong.</p>';
+    L.marker([-0.9241358328363046, 100.36245736766848],17).bindTooltip("Masjid Raya Sumatera Barat").bindPopup(info_masjid_raya).addTo(mymap);
+
+
+    
+
+    var polygon = L.polygon([
+        [-0.9144177147594804, 100.46616172587504],
+        [-0.9241358328363046, 100.36245736766848],
+        [-0.9374867431110305, 100.36039978464098],
+    ]).addTo(mymap).bindPopup('I am a polygon')
+
+    var popup = L.popup()
+        .setLatLng(e.latlng)
+        .setContent('you clicked the map at'+ e.latlng.toString())
+        .openOn(mymap);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [36,36]
+        }
+    });
+
+    var masjidicon = new LeafIcon({iconUrl: 'images/masjid_icon.png'});
+
+    L.marker([-0.9241358328363046, 100.36245736766848],{icon: masjidicon}).addTo(mymap);
+
+</script>
+</html>
