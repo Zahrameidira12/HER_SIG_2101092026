@@ -1,0 +1,50 @@
+<!<!DOCTYPE html>
+<html>
+    <head>
+        <title>Latihan 3 Menampilkan Tooltip dan Poopup</title>
+        <link rel="stylesheet" href="leaflet.css"/>
+        <script src="leaflet.js"></script>
+    </head>
+    <body>
+        <div id='mapku' style="width: 100%; height: 600px;"></div>
+    </body>
+    <script type="text/javascript">
+        var mymap = L.map('mapku').setView([-0.9142997125961476,100.46607589539128], 13);
+        
+        var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	    }).addTo(mymap);
+        
+        L.marker([-0.9142997125961476,100.46607589539128]).bindTooltip("Sini Tooltip = arahkan").addTo(mymap),
+        L.marker([-0.9142997125961476,100.50707589539128]).bindPopup("Sini Popup = tekan").addTo(mymap);
+
+        var circle = L.circle([-0.9142997125961476,100.46607589539128],{
+            color: 'red',
+            fillColor: '#f03',
+            fillopacity: 0.5,
+            radius: 500
+        }).addTo(mymap).bindPopup("Sini Circle");
+
+        var polygon = L.polygon([
+            [-0.9142997125961476,100.46607589539128],
+            [-0.9242997125961476,100.4660589539128],
+            [-0.9342997125961476,100.56607589539128] 
+        ]).addTo(mymap).bindPopup("Sini Polygon");
+
+        var popup = L.popup()
+        .setLatLng ([-0.9142997125961476,100.46607589539128])
+        .setContent('I am a standalone popup.')
+        .openOn(mymap);
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latLng)
+                .setContent('You click the map at ' + e.latlng.toString())
+                .openOn(mymap);
+        }
+
+        map.on('click' , onMapClick);
+
+    </script>
+</html>
